@@ -48,10 +48,7 @@ class MyHomePage extends StatelessWidget {
     List<int> prices = appState.price;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 76, 145, 70),
-        title: const Center(child: Text("Home")),
-      ),
+      appBar: const buildAppBar(title: "Home"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: SizedBox(
@@ -126,11 +123,7 @@ class _OrderPageState extends State<OrderPage> {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text("Order"),
-        )
-      ),
+      appBar: const buildAppBar(title: "Order Food"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -212,11 +205,7 @@ class OrderDetailPage extends StatelessWidget {
     String notes = appState.foodNotes;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text("Order Detail"),
-        )
-      ),
+      appBar: const buildAppBar(title: "Order Summary"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -259,4 +248,25 @@ class OrderDetailPage extends StatelessWidget {
       )
     );
   }
+}
+
+class buildAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  const buildAppBar({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: const Color.fromARGB(255, 76, 145, 70),
+      title: Center(
+        child: Text(title),
+      )
+    );
+  }
+
+  @override
+   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
